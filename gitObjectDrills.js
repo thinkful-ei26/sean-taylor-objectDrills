@@ -80,3 +80,49 @@ const decodeWords = function(s) {
 };
 
 console.log(decodeWords('craft block argon meter bells brown croon droop'));
+function createCharacter(name,nickName, race, origin, attack, defense ){
+    const x = attack;
+    const y = defense;  
+
+    return { 
+        name: `${name}`, 
+        nickName: `${nickName}`, 
+        race: `${race}`, 
+        origin:`${origin}`, 
+        attack:`${attack}`, 
+        defense: `${defense}`, 
+        describe: function(){
+            return `${name} has a race of ${race} and is from ${origin}.`;
+        },
+        evaluateFight: function(charater){
+            if( this.attack < character.defense){
+                return `${character} takes zero damage!`;
+            }
+            else{
+                return 'Your opponent takes' + this.attack - charater.defense + 'damage and you receive' + charater.attack - this.defense + 'damage';
+            }
+
+        }
+    }
+}
+const gandolf = createCharacter('Gandalf the White', 'gandalf', 'Wizard' ,'Middle Earth', 10 , 6  ); 
+const bilbo = createCharacter('Bilbo Baggins','bilbo','Hobbit' ,'The Shire', 2 ,1 );
+const frodo = createCharacter('Frodo Baggins', 'frodo', 'Hobbit', 'The Shire', 3 , 2   );
+const aragorn = createCharacter('Aragorn son of Arathorn' ,'aragorn' ,  'Man' , 'Dunnedain' , 6 ,8  );
+const legolas = createCharacter('Legolas', 'legolas', 'Elf' ,'Woodland Realm' , 8 ,5 ); 
+const legend = createCharacter('Legend', 'Death', 'God','The Universe', 100, 100 ); 
+const arrayOfCharaters = [gandolf, bilbo, frodo, aragorn, legolas, legend]; 
+arrayOfCharaters.find(value => value.nickName == 'aragorn').describe(); 
+const hobbitArray = arrayOfCharaters.filter(value => value.race == 'Hobbit'); 
+const attackArray = arrayOfCharaters.filter(value => value.attack > 5); 
+//creating a new weapon and description for gandolf
+gandolf.weapon = 'mages staff'; 
+gandolf.describe = function(){
+    return `${gandolf.name} has a race of ${gandolf.race} and yields a  ${gandolf.weapon}.`;
+},
+//and so on for the rest of the charaters 
+bilbo.weapon = ' running away'; 
+frodo.weapon = 'courage'; 
+aragorn.weapon = ' a huge sword'; 
+legolas.weapon = ' anything he can get his hands on'; 
+legend.weapon = ' mystical powers'; 
