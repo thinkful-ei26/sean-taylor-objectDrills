@@ -126,3 +126,42 @@ frodo.weapon = 'courage';
 aragorn.weapon = ' a huge sword'; 
 legolas.weapon = ' anything he can get his hands on'; 
 legend.weapon = ' mystical powers'; 
+
+const HEROES = [
+    { id: 1, name: 'Captain America', squad: 'Avengers' },
+    { id: 2, name: 'Iron Man', squad: 'Avengers' },
+    { id: 3, name: 'Spiderman', squad: 'Avengers' },
+    { id: 4, name: 'Superman', squad: 'Justice League' },
+    { id: 5, name: 'Wonder Woman', squad: 'Justice League' },
+    { id: 6, name: 'Aquaman', squad: 'Justice League' },
+    { id: 7, name: 'Hulk', squad: 'Avengers' },
+];
+
+const findOne = function(arr, query) {
+    const qKeys = Object.keys(query); // [id]
+
+    const result = arr.filter(value => {
+        const arrKeys = Object.keys(value); // [id, name, squad]
+        for (const key in qKeys) {
+            // console.log(qKeys[key]);
+            if (!(arrKeys.includes(qKeys[key]))) {
+                return false;
+            }
+            if (value[qKeys[key]] !== query[qKeys[key]]) {
+                return false;
+            }
+        }
+        return true;
+    });
+    // console.log(result);
+    if (!result[0]) {
+        return null;
+    }
+    return result[0];
+};
+
+console.log(findOne(HEROES, { id: 1 }));
+console.log(findOne(HEROES, { id: 10 }));
+console.log(findOne(HEROES, { id: 2, name: 'Aquaman' }));
+console.log(findOne(HEROES, { id: 5, squad: 'Justice League' }));
+console.log(findOne(HEROES, { squad: 'Justice League' }));
