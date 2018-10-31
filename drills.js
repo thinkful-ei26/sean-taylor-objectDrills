@@ -365,19 +365,18 @@ const objectB = {
 const expectedKeys = ['id', 'name', 'age', 'city'];
 
 function validateKeys(object, expectedKeys) {
-  for(const key in object){
-    let i =0; 
-    if (Object.keys(object).length != expectedKeys.length) {
-        return false;
-    }
-    else if( key != expectedKeys[i])
-      return false; 
-    else{
-      return true; 
-    }
-    i++;
+  let objectArray = Object.keys(object).sort(); 
+  let keyArray = expectedKeys.sort(); 
+  if (Object.keys(object).length != expectedKeys.length) {
+    return false;
   }
-}
+  console.log(objectArray.every((element, index) => { return element == keyArray[index]}));
+    
+ return objectArray.every((element, index) => { return element == keyArray[index]}); 
+    }
+ 
+  
+
 
 /* From here down, you are not expected to 
    understand.... for now :)  
