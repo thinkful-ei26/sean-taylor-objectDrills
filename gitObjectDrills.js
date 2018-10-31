@@ -20,4 +20,25 @@ const obj = {
 
 for (const property in obj) {
     console.log(`${property}: ${obj[property]}`);
+} 
+const hobbit = {
+    meals: ['breakfast', 'second breakfast', 'elevenses', 'lunch', 'afternoon tea', 'dinner', 'supper']
+}
+console.log(hobbit.meals[3]);
+
+const michael = { 
+    name: 'michael', 
+    'job title': 'dancer',
+}
+const john = {
+    name: 'john', 
+    'job title': 'golfer'
+}
+const tim = {
+    name: 'tim', 
+    'job title': 'unemployed', 
+}
+const nameArray = [michael, john, tim]; 
+for(const name in nameArray){
+    console.log(`${nameArray[name].name} : ${nameArray[name]['job title']}`);
 }
