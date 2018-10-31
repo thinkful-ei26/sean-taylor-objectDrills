@@ -138,16 +138,16 @@ const HEROES = [
 ];
 
 const findOne = function(arr, query) {
-    const qKeys = Object.keys(query); // [id]
+    const arrayKeys = Object.keys(query); // [id]
 
     const result = arr.filter(value => {
         const arrKeys = Object.keys(value); // [id, name, squad]
-        for (const key in qKeys) {
-            // console.log(qKeys[key]);
-            if (!(arrKeys.includes(qKeys[key]))) {
+        for (const key in arrayKeys) {
+            // console.log(arrayKeys[key]);
+            if (!(arrKeys.includes(arrayKeys[key]))) {
                 return false;
             }
-            if (value[qKeys[key]] !== query[qKeys[key]]) {
+            if (value[arrayKeys[key]] !== query[arrayKeys[key]]) {
                 return false;
             }
         }
@@ -160,8 +160,48 @@ const findOne = function(arr, query) {
     return result[0];
 };
 
-console.log(findOne(HEROES, { id: 1 }));
-console.log(findOne(HEROES, { id: 10 }));
-console.log(findOne(HEROES, { id: 2, name: 'Aquaman' }));
-console.log(findOne(HEROES, { id: 5, squad: 'Justice League' }));
-console.log(findOne(HEROES, { squad: 'Justice League' }));
+// console.log(findOne(HEROES, { id: 1 }));
+// console.log(findOne(HEROES, { id: 10 }));
+// console.log(findOne(HEROES, { id: 2, name: 'Aquaman' }));
+// console.log(findOne(HEROES, { id: 5, squad: 'Justice League' }));
+// console.log(findOne(HEROES, { squad: 'Justice League' }));
+// database findOne accesses database object and looks inside the store object within database and searches the heroes array, which is an array of 
+// objects, to find the desired object.
+const Database = {
+    store: {
+      heroes: [
+        { id: 1, name: 'Captain America', squad: 'Avengers' },
+        { id: 2, name: 'Iron Man', squad: 'Avengers' },
+        { id: 3, name: 'Spiderman', squad: 'Avengers' },
+        { id: 4, name: 'Superman', squad: 'Justice League' },
+        { id: 5, name: 'Wonder Woman', squad: 'Justice League' },
+        { id: 6, name: 'Aquaman', squad: 'Justice League' },
+        { id: 7, name: 'Hulk', squad: 'Avengers' },
+      ]
+      
+    },
+    findOne: function (query){
+       const arrayAccess = this.store.heroes; 
+       const arrayKeys = Object.keys(query); // [id]
+
+       const result = arrayAccess.filter(value => {
+           const arrKeys = Object.keys(value); // [id, name, squad]
+           for (const key in arrayKeys) {
+               // console.log(arrayKeys[key]);
+               if (!(arrKeys.includes(arrayKeys[key]))) {
+                   return false;
+               }
+               if (value[arrayKeys[key]] !== query[arrayKeys[key]]) {
+                   return false;
+               }
+           }
+           return true;
+       });
+       // console.log(result);
+       if (!result[0]) {
+           return null;
+       }
+       return result[0];
+   }, 
+}
+Database.findOne({ id: 5 }); 
