@@ -32,13 +32,20 @@ const michael = {
 }
 const john = {
     name: 'john', 
-    'job title': 'golfer'
+    'job title': 'golfer',
+    boss: 'michael',
 }
 const tim = {
     name: 'tim', 
-    'job title': 'unemployed', 
+    'job title': 'unemployed',
+    boss: 'john', 
 }
 const nameArray = [michael, john, tim]; 
 for(const name in nameArray){
-    console.log(`${nameArray[name].name} : ${nameArray[name]['job title']}`);
+    if (!nameArray[name].boss){
+        console.log(`${nameArray[name]['job title']} ${nameArray[name].name} doesn't report to anybody`);
+    } else {
+    console.log(`${nameArray[name]['job title']} ${nameArray[name].name} reports to ${nameArray[name].boss}`);
+    }
 }
+
